@@ -21,14 +21,14 @@
 
 ChronoSphere/
 ├── ChronoSphere.java       # Main application file
-├── data/                   # Data storage directory
-│   ├── WorldClock.txt      # Saved world clock cities
-│   ├── PrayerTimesPAK.csv  # Prayer time database
-│   ├── TasksManager.txt    # Task storage
-│   ├── Events.txt          # Event storage
-│   └── Alarm.txt           # Alarm storage
-├── .gitignore
-└── README.md
+├── README.md               # Project documentation
+├── screenshots/            # Application screenshots
+└── data/                   # Data storage directory
+├── WorldClock.txt          # Saved world clock cities
+├── PrayerTimesPAK.csv      # Prayer time database
+├── TasksManager.txt        # Task storage
+├── Events.txt              # Event storage
+└── addAlarm.txt            # Alarm storage
 
 ---
 
@@ -38,16 +38,6 @@ ChronoSphere/
 3. **Calendar, Tasks & Events** – Enables task and event management with file-based persistence. Users can create, update, and track tasks or events, ensuring nothing is missed in their schedule.
 4. **Alarms** – Lets users set multiple alarms with status tracking and notifications. Alarms can be customized and are persistent between program runs.
 5. **Utilities** – Includes stopwatch and timer functions. Useful for tracking time intervals or setting temporary countdowns for productivity or daily routines.
-
----
-
-## How to Run
-1. Ensure you have Java JDK installed (version 8 or higher)
-2. Compile the program:
-   ```bash
-   javac ChronoSphere.java
-3. Run the application:
-   java ChronoSphere
 
 ---
 
@@ -68,10 +58,11 @@ All user data is stored in the data/ directory:
 
 ## Notes / Tips
 - 💻 *Recommended Terminal:* Run the application in *VS Code Terminal* (or any terminal that supports ANSI colors). The default Windows CMD may not display colors properly.  
-- 🗂️ *File Paths:* All data files are referenced using absolute paths. To run the application successfully, update the file paths in the code to match your local system. For example:  
+- 🗂️ *File Paths:* All data files are referenced using absolute paths. To run the application successfully, update the file paths in the code to match your local system. For example in this project the file paths are used like:  
   ```java
   "C:\\Users\\User\\OneDrive\\Desktop\\ChronoSphere\\data\\WorldClock.txt"
-Make sure to adjust the path in all 7–8 locations where files are referenced. Once these paths are correctly set, the program will work as intended.
+Make sure to adjust the path in all 7–8 locations where files are referenced matching your local system. Once these paths are correctly set, the program will work as intended.
+
 ✅ Following these steps ensures that all modules (World Clock, Prayer Times, Calendar, Alarms, Utilities) function correctly.
 
 ---
