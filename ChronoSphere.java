@@ -118,7 +118,7 @@ class ChronoSphereApp {
         System.out.println(CYAN + "╠═══════════════════════════════════════════════════════════════════════════════════════════════════════════╣" + RESET);
         System.out.println(CYAN + "║" + RESET + "                                                                                                           " + CYAN + "║" + RESET);
         System.out.println(CYAN + "║" + RESET + "                                         Current System Time:                                              " + CYAN + "║" + RESET);
-        System.out.println(CYAN + "║" + RESET + BRIGHT_YELLOW + "                                  [ " + date + " | " + time + " | " + day + " ]" + RESET +"" + CYAN + "                                     ║" + RESET);
+        System.out.println(CYAN + "║" + RESET + BRIGHT_YELLOW + "                                  [ " + date + " | " + time + " | " + day + " ]" + RESET +"" + CYAN + "                                    ║" + RESET);
         System.out.println(CYAN + "║" + RESET + "                                                                                                           " + CYAN + "║" + RESET);
         System.out.println(CYAN + "╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════╝" + RESET);
         System.out.println();
@@ -1437,81 +1437,106 @@ class AlarmModule {
         }
     }
 
-    public void viewAlarms() {
-        System.out.println(CYAN + "\n╔═══════════════════════════════════════════╗");
-        System.out.println("║" + BOLD + "         VIEW ALARMS                       " + CYAN + "║");
-        System.out.println("╚═══════════════════════════════════════════╝" + RESET);
-        String Filename = "C:\\Users\\User\\OneDrive\\Desktop\\ChronoSphere\\data\\addAlarm.txt";
-        
-        List<String> alarms = fileHelper.readFileToList(Filename);
-        
-        if (alarms.isEmpty()) {
-            System.out.println(YELLOW + "No alarms set." + RESET);
-            return;
-        }
-        
-        System.out.println(CYAN + "┌─────┬───────────┬─────────────┬─────────────────┐" + RESET);
-        System.out.println(CYAN + "│" + WHITE + " No. " + CYAN + "│" + WHITE + " 24-Hour  " + CYAN + " │" + WHITE + "  12-Hour   " + CYAN + " │" + WHITE + "     Status    " + CYAN + "  │" + RESET);
-        System.out.println(CYAN + "├─────┼───────────┼─────────────┼─────────────────┤" + RESET);
-        
-        DateTimeFormatter formatter24 = DateTimeFormatter.ofPattern("HH-mm");
-        DateTimeFormatter formatter12 = DateTimeFormatter.ofPattern("hh:mm a");
-        
-        for (int i = 0; i < alarms.size(); i++) {
-            String alarmTime = alarms.get(i);
-            try {
-                LocalTime time = LocalTime.parse(alarmTime, formatter24);
-                String displayTime12 = time.format(formatter12);
-                String displayTime24 = alarmTime.replace("-", ":");
-                
-                LocalTime now = LocalTime.now();
-                
-                // Get stored status or calculate based on time
-                String storedStatus = alarmStatus.get(alarmTime);
-                String status;
-                
-                if (storedStatus != null && (storedStatus.equals("Rang") || storedStatus.equals("Missed"))) {
-                    // Use stored status if available
-                    if (storedStatus.equals("Rang")) {
-                        status = BLUE + "Rang  " + RESET;
-                    } else {
-                        status = RED + "Missed" + RESET;
-                    }
-                } else if (time.isBefore(now)) {
-                    // If no stored status and time has passed, mark as missed
-                    status = RED + "Missed" + RESET;
-                    alarmStatus.put(alarmTime, "Missed");
-                } else if (time.isAfter(now)) {
-                    // Calculate time until alarm
-                    long minutesUntil = java.time.Duration.between(now, time).toMinutes();
-                    if (minutesUntil > 60) {
-                        long hours = minutesUntil / 60;
-                        long mins = minutesUntil % 60;
-                        status = GREEN + "In " + hours + "h " + mins + " m" + RESET;
-                    } else {
-                        status = GREEN + "In " + minutesUntil + " m" + RESET;
-                    }
-                    alarmStatus.put(alarmTime, "Pending");
-                } else {
-                    status = YELLOW + "Now!" + RESET;
-                }
-                
-                System.out.printf(CYAN + "│" + WHITE + " %2d  " + CYAN + "│" + WHITE + "   %-7s " + CYAN + "│" + WHITE + "   %-8s  " + CYAN + "│" + WHITE + "   %-12s  " + CYAN + "      │\n" + RESET, 
-                    i + 1, displayTime24, displayTime12, status);
-            } catch (Exception e) {
-                System.out.printf(CYAN + "│" + WHITE + " %2d  " + CYAN + "│" + RED + "   %-7s " + CYAN + "│" + RED + "   %-8s  " + CYAN + "│" + RED + "   %-12s  " + CYAN + "      │\n" + RESET, 
-                    i + 1, alarmTime, "Invalid", "Format");
-            }
-        }
-        System.out.println(CYAN + "└─────┴───────────┴─────────────┴─────────────────┘" + RESET);
-        System.out.println(YELLOW + "Total alarms: " + alarms.size() + RESET);
-        
-        // Legend for status colors
-        System.out.println("\n" + WHITE + "Status :" + RESET);
-        System.out.println(GREEN + "  In X min/h  " + RESET + "= Alarm is scheduled");
-        System.out.println(BLUE + "  Rang        " + RESET + "= Alarm rang and was stopped");
-        System.out.println(RED + "  Missed      " + RESET + "= Alarm time passed");
+   public void viewAlarms() {
+    System.out.println(CYAN + "\n╔═══════════════════════════════════════════╗");
+    System.out.println("║" + BOLD + "         VIEW ALARMS                       " + CYAN + "║");
+    System.out.println("╚═══════════════════════════════════════════╝" + RESET);
+    String Filename = "C:\\Users\\User\\OneDrive\\Desktop\\ChronoSphere\\data\\addAlarm.txt";
+    
+    List<String> alarms = fileHelper.readFileToList(Filename);
+    
+    if (alarms.isEmpty()) {
+        System.out.println(YELLOW + "No alarms set." + RESET);
+        return;
     }
+    
+    System.out.println(CYAN + "┌─────┬───────────┬─────────────┬───────────────────────┐" + RESET);
+    System.out.println(CYAN + "│" + WHITE + " No. " + CYAN + "│" + WHITE + " 24-Hour  " + CYAN + " │" + WHITE + "  12-Hour   " + CYAN + " │" + WHITE + "     Status    " + CYAN + "        │" + RESET);
+    System.out.println(CYAN + "├─────┼───────────┼─────────────┼───────────────────────┤" + RESET);
+    
+    DateTimeFormatter formatter24 = DateTimeFormatter.ofPattern("HH-mm");
+    DateTimeFormatter formatter12 = DateTimeFormatter.ofPattern("hh:mm a");
+    
+    for (int i = 0; i < alarms.size(); i++) {
+        String alarmTime = alarms.get(i);
+        try {
+            LocalTime time = LocalTime.parse(alarmTime, formatter24);
+            String displayTime12 = time.format(formatter12);
+            String displayTime24 = alarmTime.replace("-", ":");
+            
+            LocalTime now = LocalTime.now();
+            
+            // Get stored status or calculate based on time
+            String storedStatus = alarmStatus.get(alarmTime);
+            String status;
+            String statusColor;
+            
+            if (storedStatus != null && storedStatus.equals("Rang")) {
+                // Use stored status if it's "Rang"
+                status = "Rang";
+                statusColor = BLUE;
+            } else if (time.isBefore(now)) {
+                // If time has passed, mark as missed
+                status = "Missed";
+                statusColor = RED;
+                alarmStatus.put(alarmTime, "Missed");
+            } else if (time.isAfter(now)) {
+                // Calculate time until alarm
+                long minutesUntil = java.time.Duration.between(now, time).toMinutes();
+                if (minutesUntil >= 60) {
+                    long hours = minutesUntil / 60;
+                    long mins = minutesUntil % 60;
+                    if (mins == 0) {
+                        status = String.format("In %dh        ", hours);
+                    } else {
+                        status = String.format("In %dh %02dm    ", hours, mins);
+                    }
+                } else {
+                    status = String.format("In %02dm       ", minutesUntil);
+                } 
+                statusColor = GREEN;
+                alarmStatus.put(alarmTime, "Pending");
+            } else {
+                status = "Now!";
+                statusColor = YELLOW;
+                alarmStatus.put(alarmTime, "Now!");
+            }
+            
+            // Format status with consistent width 
+            String formattedStatus;
+            if (status.equals("Missed")) {
+                formattedStatus = "Missed       "; 
+            } else if (status.equals("Rang")) {
+                formattedStatus = "Rang         "; 
+            } else if (status.equals("Now!")) {
+                formattedStatus = "Now!      "; 
+            } else if (status.startsWith("In") && !status.contains("h")) {
+                formattedStatus = String.format("%-10s", status); 
+            } else if (status.startsWith("In") && status.contains("h")) {
+                formattedStatus = String.format("%-10s", status); 
+            } else {
+                formattedStatus = String.format("%-10s", status); 
+            }
+            
+            System.out.printf(CYAN + "│" + WHITE + " %2d  " + CYAN + "│" + WHITE + "   %-7s " + CYAN + "│" + WHITE + "   %-8s  " + CYAN + "│" + statusColor + "   %-10s " + CYAN + "      │\n" + RESET, 
+                i + 1, displayTime24, displayTime12, formattedStatus);
+        } catch (Exception e) {
+            // Handle invalid format
+            String formattedStatus = "Invalid   ";
+            System.out.printf(CYAN + "│" + WHITE + " %2d  " + CYAN + "│" + RED + "   %-7s " + CYAN + "│" + RED + "   %-8s  " + CYAN + "│" + RED + "   %-10s " + CYAN + "      │\n" + RESET, 
+                i + 1, alarmTime, "Invalid", formattedStatus);
+        }
+    }
+    System.out.println(CYAN + "└─────┴───────────┴─────────────┴───────────────────────┘" + RESET);
+    System.out.println(YELLOW + "Total alarms: " + alarms.size() + RESET);
+    
+    // Legend for status colors
+    System.out.println("\n" + WHITE + "Status Legend:" + RESET);
+    System.out.println(GREEN + "  In XXm        " + RESET + "= Alarm is scheduled (minutes only)");
+    System.out.println(GREEN + "  In Xh XXm     " + RESET + "= Alarm is scheduled (hours and minutes)");
+    System.out.println(BLUE + "  Rang          " + RESET + "= Alarm rang and was stopped");
+    System.out.println(RED + "  Missed        " + RESET + "= Alarm time passed");
+}
 
     public void deleteAlarm() {
         System.out.println(CYAN + "\n╔═══════════════════════════════════════════╗");
@@ -1626,7 +1651,8 @@ class AlarmModule {
                     }
                     
                     if (beepCount >= 60) {
-                        System.out.println(YELLOW + "\nAlarm for " + displayTime + " stopped automatically after 30 seconds." + RESET);
+                        System.out.println(YELLOW + "\nAlarm for " + displayTime + " stopped automatically after 30 seconds. \n" + RESET);
+                        alarmMenu();
                         // Mark as missed since it rang but wasn't stopped manually
                         alarmStatus.put(alarm, "Missed");
                     }
